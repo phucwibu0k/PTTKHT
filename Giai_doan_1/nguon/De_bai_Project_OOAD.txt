@@ -1,0 +1,383 @@
+                     PHÂN TÍCH THIẾT KẾ HƯỚNG ĐỐI TƯỢNG
+
+               ĐỀ BÀI TẬP LỚN (PROJECT)
+   Phân tích & Thiết kế một hệ thống phần mềm theo hướng đối tượng - làm việc nhóm
+
+
+Hình thức       Làm việc theo nhóm 3–5 sinh viên
+
+Số giai đoạn    3 giai đoạn - 2 điểm kiểm tra quá trình + 1 điểm kết thúc học phần
+
+Thang điểm
+                Giai đoạn 1: 20%; Giai đoạn 2: 20%; Giai đoạn 3: 60%
+gợi ý
+
+                Draw.io /Visual paradigm/PlantUML (vẽ UML). AI hỗ trợ được phép, cần
+Công cụ
+                minh bạch.
+1. Giới thiệu chung
+
+1.1. Mục tiêu
+Bài tập lớn này yêu cầu mỗi nhóm thực hiện đầy đủ quy trình phân tích và thiết kế hướng đối tượng
+cho một hệ thống phần mềm tự chọn, mô phỏng đúng những gì một nhóm kỹ sư phần mềm thực hiện
+trước khi bắt tay viết code trong một dự án thật. Sản phẩm cuối cùng không phải là code chạy được,
+mà là một bộ tài liệu phân tích – thiết kế nhất quán, đủ chi tiết để bất kỳ lập trình viên nào khác
+cũng có thể cầm lên và triển khai đúng ý đồ thiết kế.
+
+Qua bài tập lớn, sinh viên cần chứng minh được 4 năng lực cốt lõi:
+
+  • Đào yêu cầu - chuyển mô tả nghiệp vụ mơ hồ thành yêu cầu rõ ràng, có cấu trúc.
+  • Thiết kế đúng chuẩn UML - Use Case, Class, Sequence/Activity/State Diagram thể hiện đúng
+    bản chất quan hệ và hành vi hệ thống.
+  • Vận dụng nguyên tắc thiết kế - SOLID và Design Pattern áp dụng đúng ngữ cảnh, không
+    over-engineering.
+  • Tính nhất quán & khả năng phản biện - mọi sơ đồ phải truy vết được nguồn gốc lẫn nhau, và
+    nhóm phải giải thích được mọi lựa chọn thiết kế của chính mình.
+
+1.2. Hình thức tổ chức
+  • Làm việc theo nhóm 3–5 sinh viên, tự chọn thành viên hoặc theo phân công của giảng viên.
+  • Mỗi nhóm tự chọn 1 đề tài trong danh sách gợi ý ở Mục 2, hoặc đề xuất đề tài riêng và cần
+    được giảng viên duyệt trước khi bắt đầu Giai đoạn 1.
+  • Đề tài giữ nguyên xuyên suốt cả 3 giai đoạn - không đổi đề tài giữa chừng.
+
+1.3. Nguyên tắc xuyên suốt bắt buộc
+Toàn bộ bài làm, ở cả 3 giai đoạn, phải tuân thủ nguyên tắc Truy vết nguồn gốc:
+
+  • Mỗi Actor/Use Case phải khớp với một vai trò hoặc mục tiêu thật trong mô tả đề tài.
+  • Mỗi Class phải truy vết được về danh từ trong Use Case Specification.
+  • Mỗi Message trong Sequence Diagram phải trùng tên với một Method đã khai báo trong Class
+    Diagram.
+  • Mọi Design Pattern áp dụng phải giải quyết một vấn đề thiết kế thật, có thể giải thích được -
+    không áp dụng chỉ để "cho có".
+Đây là tiêu chí chấm điểm quan trọng nhất xuyên suốt cả 3 giai đoạn - chiếm tỉ trọng cao nhất trong
+mọi rubric bên dưới.
+
+1.4. Quy định về việc sử dụng AI
+Sinh viên được phép sử dụng các công cụ AI (ChatGPT, Claude, Copilot...) để hỗ trợ trong quá trình
+phân tích, thiết kế và viết tài liệu, với điều kiện:
+  • Mọi nội dung do AI hỗ trợ đều phải được nhóm hiểu rõ, có thể giải thích và bảo vệ được khi bị
+    hỏi trực tiếp.
+  • Nhóm cần lưu lại nhật ký sử dụng AI (prompt chính đã dùng + nhận xét đúng/sai của AI) - nộp
+    kèm ở Giai đoạn 3, xem mẫu tại Phụ lục B.
+  • Không chấp nhận việc AI thiết kế toàn bộ mà nhóm không có sự phản biện, chỉnh sửa nào.
+Xem chi tiết tiêu chí "Minh bạch vai trò AI" trong rubric Giai đoạn 3.
+
+
+2. Đề tài dự án
+Mỗi nhóm chọn 1 trong các đề tài gợi ý dưới đây (ưu tiên không trùng đề tài với nhóm khác trong
+cùng lớp), hoặc đề xuất một đề tài khác có độ phức tạp tương đương và được giảng viên duyệt.
+
+ STT    Đề tài                   Mô tả ngắn gọn
+
+        Đặt phòng khách          Khách hàng tìm phòng, đặt phòng online, thanh toán; nhân viên lễ
+   1
+        sạn                      tân quản lý đơn, xác nhận, xử lý check-in/check-out.
+
+        Đặt bàn & gọi món        Khách đặt bàn trước, gọi món tại bàn; bếp nhận đơn theo thứ tự; thu
+   2
+        quán ăn                  ngân tính hóa đơn, áp dụng khuyến mãi.
+
+                                 Khách hàng đặt chuyến đi; hệ thống ghép tài xế gần nhất; tính cước
+   3    Đặt xe công nghệ
+                                 theo khoảng cách; đánh giá sau chuyến đi.
+
+                                 Bạn đọc mượn/trả sách, đặt trước sách đang được mượn; thủ thư
+   4    Quản lý thư viện
+                                 quản lý kho, tính phạt trễ hạn.
+
+        Bán vé xem phim          Khách chọn suất chiếu, chọn ghế, thanh toán; rạp quản lý lịch chiếu,
+   5
+        online                   phòng chiếu, khuyến mãi combo bắp nước.
+
+        Quản lý phòng            Bệnh nhân đặt lịch khám; bác sĩ khám và kê đơn; lễ tân quản lý lịch
+   6
+        khám tư nhân             hẹn và thu phí.
+
+        Sàn thương mại điện      Người mua đặt hàng, thanh toán, theo dõi đơn; người bán quản lý
+   7
+        tử mini                  sản phẩm, tồn kho, xử lý đơn hàng.
+
+        Quản lý ký túc xá        Sinh viên đăng ký phòng, báo sự cố; quản lý ký túc xá phân phòng,
+   8
+        sinh viên                thu phí, xử lý vi phạm nội quy.
+
+
+
+Lưu ý: đề tài cần có độ phức tạp đủ lớn - tối thiểu 2 loại Actor và 5 Use Case chính - để đảm bảo đủ
+chất liệu cho cả 3 giai đoạn thiết kế.
+3. Cấu trúc 3 giai đoạn & thang điểm tổng quan
+Bài tập lớn được chia thành 3 giai đoạn, tương ứng với 2 đầu điểm kiểm tra quá trình và 1 đầu điểm
+kết thúc học phần. Mỗi giai đoạn kế thừa trực tiếp sản phẩm của giai đoạn trước - nhóm không làm
+lại từ đầu, mà bổ sung và hoàn thiện dần.
+
+ Giai đoạn    Nội dung chính                      Vai trò điểm số            Trọng số gợi ý
+
+              Phân tích yêu cầu & Use Case        Điểm kiểm tra quá trình
+      1                                                                           20%
+              Diagram/Specification               lần 1
+
+              Class Diagram &                     Điểm kiểm tra quá trình
+      2                                                                           20%
+              Sequence/Activity/State Diagram     lần 2
+
+              Áp dụng Design Pattern, hoàn
+      3       thiện toàn bộ tài liệu & báo cáo,   Điểm kết thúc học phần          60%
+              thuyết trình bảo vệ
+
+
+Trọng số trên là gợi ý - giảng viên có thể điều chỉnh cho phù hợp với quy định chấm điểm của
+khoa/trường, miễn giữ đúng tinh thần: Giai đoạn 3 chiếm tỉ trọng lớn nhất vì là nơi tổng hợp và
+đánh giá toàn diện nhất.
+4. Giai đoạn 1 - Phân tích yêu cầu & Use Case
+Vai trò điểm số: Điểm kiểm tra quá trình lần 1 · Trọng số gợi ý: 20% tổng điểm học phần
+
+4.1. Yêu cầu sản phẩm nộp
+ 1. Mô tả bài toán (Project Brief) - 0,5–1 trang, viết lại đề tài đã chọn dưới dạng mô tả nghiệp vụ,
+    coi như lời kể của khách hàng.
+ 2. Danh sách yêu cầu - phân loại rõ Yêu cầu chức năng và Yêu cầu phi chức năng, tối thiểu 8 yêu
+    cầu chức năng.
+ 3. Use Case Diagram hoàn chỉnh - tối thiểu 2 Actor (ít nhất 1 Primary, 1 Secondary), tối thiểu 6
+    Use Case, có sử dụng hợp lý cả quan hệ Include và Extend, đúng chiều mũi tên.
+ 4. Use Case Specification - viết đầy đủ theo 6 phần chuẩn (Tên, Actor, Tiền điều kiện, Luồng
+    chính, Luồng phụ/Ngoại lệ, Hậu điều kiện) cho tối thiểu 4 Use Case chính.
+
+4.2. Rubric chấm điểm Giai đoạn 1
+ Tiêu chí                             Trọng số   Mô tả yêu cầu đạt
+
+                                                 Phân biệt rõ chức năng/phi chức năng; yêu cầu đủ
+ Chất lượng phân tích yêu cầu           20%
+                                                 chi tiết, không mơ hồ.
+
+                                                 Actor/Use Case hợp lý; Include/Extend đúng
+ Use Case Diagram đúng chuẩn            30%
+                                                 chiều, có lý do nghiệp vụ rõ ràng.
+
+ Use Case Specification & tính truy              Đủ 6 phần; mỗi chi tiết truy vết được về mô tả đề
+                                        35%
+ vết                                             tài; luồng ngoại lệ hợp lý.
+
+                                                 Tài liệu rõ ràng, có cấu trúc, ký hiệu UML đúng
+ Hình thức trình bày                    15%
+                                                 chuẩn.
+
+
+4.3. Hình thức nộp
+ • File PDF gồm: Project Brief, Danh sách yêu cầu, Use Case Diagram (ảnh/PDF xuất từ draw.io,
+   Visual paradigm, hoặc PlantUML), Use Case Specification.
+ • Nộp theo nhóm, ghi rõ tên và MSSV toàn bộ thành viên trên trang bìa.
+5. Giai đoạn 2 - Class Diagram & Hành vi hệ thống
+Vai trò điểm số: Điểm kiểm tra quá trình lần 2 · Trọng số gợi ý: 20% tổng điểm học phần
+
+Giai đoạn này bắt buộc kế thừa trực tiếp từ Use Case Specification đã nộp ở Giai đoạn 1. Nếu giảng
+viên đã góp ý sửa đổi ở Giai đoạn 1, nhóm cần cập nhật trước khi rút Class.
+
+5.1. Yêu cầu sản phẩm nộp
+ 1. Class Diagram hoàn chỉnh - tối thiểu 6 Class, rút trực tiếp từ danh từ/động từ trong Use Case
+    Specification Giai đoạn 1; thể hiện đủ các quan hệ: Association, ít nhất 1 Aggregation hoặc
+    Composition, và ít nhất 1 Inheritance nếu đề tài phù hợp.
+ 2. Thuyết minh vận dụng SOLID - đoạn văn ngắn (nửa trang) chỉ ra: Class nào có nguy cơ vi
+    phạm SRP và cách nhóm đã tránh; 1 tình huống có thể áp dụng OCP trong thiết kế.
+ 3. Sequence Diagram - vẽ cho tối thiểu 2 luồng chính (Use Case), thể hiện đủ Lifeline,
+    Activation Bar, Message và Return Message; mọi Message phải trùng tên với Method đã khai
+    báo trong Class Diagram.
+ 4. Activity Diagram hoặc State Diagram - chọn 1 trong 2, áp dụng cho đúng tình huống:
+    Activity cho luồng có rẽ nhánh/song song phức tạp, hoặc State cho 1 entity có vòng đời nhiều
+    trạng thái.
+ 5. Ghi chú vòng lặp phản hồi (nếu có) - nếu trong lúc vẽ Sequence Diagram, nhóm phát hiện
+    Class Diagram thiếu Method và phải bổ sung, hãy ghi chú lại ngắn gọn: Method nào được
+    thêm, vì sao - đây là điểm cộng thể hiện quy trình thiết kế thực tế.
+
+5.2. Rubric chấm điểm Giai đoạn 2
+ Tiêu chí                          Trọng số   Mô tả yêu cầu đạt
+
+ Class Diagram truy vết được từ               Mỗi Class có thể chỉ ra nguồn gốc từ Use Case
+                                     25%
+ Giai đoạn 1                                  Spec; đặt tên đúng chuẩn PascalCase, là danh từ.
+
+                                              Phân biệt đúng
+ Đúng bản chất các quan hệ           20%      Association/Aggregation/Composition/Inheritance,
+                                              không nhầm lẫn.
+
+                                              Thuyết minh hợp lý, có ví dụ cụ thể từ chính thiết
+ Vận dụng SRP & OCP                  20%
+                                              kế của nhóm, không nói chung chung.
+
+ Sequence Diagram nhất quán với               Không có Message nào thiếu Method tương ứng;
+                                     25%
+ Class                                        đúng ký hiệu Activation Bar/Return.
+
+                                              Tài liệu rõ ràng, nhất quán về ký hiệu với Giai
+ Hình thức trình bày                 10%
+                                              đoạn 1.
+
+
+5.3. Hình thức nộp
+  • File PDF gồm: Class Diagram, Thuyết minh SOLID, Sequence Diagram, Activity/State
+    Diagram, Ghi chú vòng lặp phản hồi (nếu có).
+  • Nộp kèm bản Use Case Diagram/Specification đã cập nhật (nếu có chỉnh sửa so với Giai đoạn
+    1).
+6. Giai đoạn 3 - Hoàn thiện, Áp dụng Pattern & Báo cáo cuối kỳ
+Vai trò điểm số: Điểm kết thúc học phần · Trọng số gợi ý: 60% tổng điểm học phần
+
+Đây là giai đoạn tổng hợp toàn bộ 2 giai đoạn trước thành một bộ hồ sơ thiết kế hoàn chỉnh, đồng
+thời bổ sung Design Pattern và trình bày bảo vệ trước lớp - mô phỏng một buổi Sprint Review thật.
+
+6.1. Yêu cầu sản phẩm nộp
+ 1. Áp dụng Design Pattern - chọn tối thiểu 1 pattern trong số Strategy, Factory, Observer (hoặc
+    pattern khác đã tự tìm hiểu) để refactor một phần Class Diagram; viết rõ: vấn đề thiết kế nào
+    được giải quyết, vì sao chọn pattern này, và vì sao KHÔNG over-engineering.
+ 2. Hoàn thiện toàn bộ tài liệu - tổng hợp lại Use Case, Class, Sequence/Activity/State, Pattern
+    thành một bộ hồ sơ THỐNG NHẤT, đã chỉnh sửa theo góp ý ở Giai đoạn 1 và 2.
+ 3. Tự kiểm tra Checklist Truy vết nguồn gốc toàn bộ - đính kèm bảng tự đánh giá theo mẫu
+    Phụ lục A, chỉ rõ từng sơ đồ ăn khớp với nhau ở đâu.
+ 4. Báo cáo cuối kỳ - văn bản tổng hợp theo cấu trúc tại Phụ lục A, có trang bìa, mục lục, và phần
+    Nhật ký sử dụng AI theo mẫu Phụ lục B.
+ 5. Thuyết trình bảo vệ - mỗi nhóm trình bày 10 phút trước lớp theo cấu trúc: Bài toán & Brief (1
+    phút) → Use Case & Class (3 phút) → Sequence Diagram, demo 1 luồng chính (2 phút) →
+    Design Pattern áp dụng (2 phút) → Hỏi đáp & phản biện (2 phút).
+
+6.2. Rubric chấm điểm Giai đoạn 3
+ Tiêu chí                            Trọng số   Mô tả yêu cầu đạt
+
+ Tính nhất quán toàn bộ                         5 sơ đồ ăn khớp với nhau; không còn chi tiết "hư
+                                       30%
+ (Traceability)                                 cấu" không truy vết được.
+
+                                                Giải quyết đúng vấn đề thật; giải thích được lý do
+ Áp dụng Design Pattern hợp lý         20%
+                                                chọn, tránh over-engineering.
+
+                                                Đầy đủ cấu trúc, trình bày chuyên nghiệp, nhất
+ Chất lượng báo cáo cuối kỳ            15%
+                                                quán ký hiệu xuyên suốt.
+
+                                                Trình bày rõ ràng, đúng thời lượng; trả lời được
+ Thuyết trình & khả năng phản biện     20%
+                                                câu hỏi Edge case/Mở rộng/Trade-off.
+
+                                                Có nhật ký sử dụng AI cụ thể; giải thích rõ phần
+ Minh bạch vai trò AI                  15%
+                                                nào AI hỗ trợ, phần nào là tư duy của nhóm.
+
+
+6.3. Hình thức nộp & thuyết trình
+  • File PDF báo cáo cuối kỳ hoàn chỉnh, nộp trước buổi thuyết trình tối thiểu 1 ngày.
+  • Thuyết trình trực tiếp trên lớp, mỗi nhóm 10 phút trình bày + tối đa 5 phút hỏi đáp.
+  • Toàn bộ thành viên nhóm phải tham gia trình bày (phân công phần nói rõ ràng), vì điểm phản
+    biện có thể được đánh giá theo cá nhân nếu cần thiết.
+7. Quy định chung
+
+7.1. Làm việc nhóm & đánh giá đóng góp cá nhân
+Điểm của bài tập lớn về nguyên tắc là điểm chung của cả nhóm. Tuy nhiên, để đảm bảo công bằng,
+mỗi thành viên cần nộp kèm Phiếu tự đánh giá đóng góp (mẫu tại Phụ lục B) ở Giai đoạn 3. Giảng
+viên có quyền điều chỉnh điểm cá nhân (+/- tối đa 1 điểm trên thang 10) dựa trên:
+
+  • Mức độ đóng góp thực tế được các thành viên còn lại xác nhận.
+  • Khả năng trả lời câu hỏi phản biện về đúng phần mình phụ trách khi thuyết trình.
+
+7.2. Liêm chính học thuật
+  • Nghiêm cấm sao chép nguyên văn thiết kế giữa các nhóm trong cùng lớp hoặc từ các khóa
+    trước - kể cả khi khác đề tài.
+  • Việc sử dụng AI hỗ trợ là được phép và khuyến khích, nhưng phải minh bạch theo đúng Mục
+    1.4 - che giấu việc dùng AI hoặc không thể giải thích được phần AI tạo ra sẽ bị coi là vi phạm
+    liêm chính học thuật.
+  • Nếu phát hiện sao chép, cả nhóm liên quan (bên sao chép và bên bị sao chép nếu có đồng thuận)
+    đều bị 0 điểm giai đoạn tương ứng.
+
+7.3. Nộp bài trễ hạn
+  • Trễ hạn không quá 24 giờ: trừ 20% điểm giai đoạn đó.
+  • Trễ hạn quá 24 giờ: giảng viên có quyền không chấm hoặc quy định riêng theo thông báo trên
+    lớp.
+  • Trường hợp bất khả kháng cần báo trước và có minh chứng hợp lệ.
+
+
+8. Mốc thời gian tổng thể
+Mốc thời gian dưới đây tham chiếu theo tiến độ 6 buổi học của môn - giảng viên điều chỉnh ngày cụ
+thể theo lịch giảng dạy thực tế.
+
+ Mốc                   Công việc                             Hạn nộp gợi ý
+
+ Buổi 1                Nhận đề bài, chọn đề tài, chọn nhóm   -
+
+                       Phân tích yêu cầu, vẽ Use Case
+ Buổi 2–3                                                    Trước Buổi 3
+                       Diagram & Specification
+
+ Sau Buổi 3            Nộp Giai đoạn 1                       Điểm kiểm tra lần 1
+
+                       Vẽ Class, Sequence, Activity/State
+ Buổi 4                                                      Trước Buổi 5
+                       Diagram
+
+ Sau Buổi 4            Nộp Giai đoạn 2                       Điểm kiểm tra lần 2
+                      Áp dụng Design Pattern, hoàn thiện
+ Buổi 5                                                       Trước Buổi 6
+                      tài liệu
+
+                      Nộp báo cáo cuối kỳ & Thuyết
+ Buổi 6                                                       Điểm kết thúc học phần
+                      trình bảo vệ
+
+
+Phụ lục A - Cấu trúc Báo cáo cuối kỳ
+Báo cáo cuối kỳ nộp ở Giai đoạn 3 cần tuân theo cấu trúc mục lục sau:
+
+ 1. Trang bìa (tên đề tài, danh sách thành viên & MSSV, lớp, giảng viên hướng dẫn)
+ 2. Mục lục
+ 3. Mô tả bài toán (Project Brief)
+ 4. Danh sách yêu cầu chức năng & phi chức năng
+ 5. Use Case Diagram & Use Case Specification
+ 6. Class Diagram & Thuyết minh vận dụng SOLID
+ 7. Sequence Diagram (tối thiểu 2 luồng chính)
+ 8. Activity Diagram / State Diagram
+ 9. Design Pattern áp dụng - vấn đề, giải pháp, lý do lựa chọn
+ 10. Bảng tự kiểm tra Checklist Truy vết nguồn gốc toàn bộ (xem mẫu bên dưới)
+ 11. Nhật ký sử dụng AI (xem mẫu Phụ lục B)
+ 12. Phân công công việc & Tự đánh giá đóng góp thành viên (xem mẫu Phụ lục B)
+
+
+Mẫu bảng tự kiểm tra Checklist Truy vết nguồn gốc
+ Sơ đồ                     Câu hỏi tự kiểm tra                                         Đạt?
+
+                           Mỗi Actor/Use Case có khớp với vai trò/mục tiêu thật
+ Use Case                                                                               ☐
+                           trong Project Brief không?
+
+                           Mỗi Class có truy vết được về danh từ trong Use Case
+ Class                                                                                  ☐
+                           Specification không?
+
+                           Mỗi Message có trùng tên với Method đã khai báo
+ Sequence                                                                               ☐
+                           trong Class Diagram không?
+
+                           Pattern áp dụng có giải quyết đúng vấn đề thật, tránh
+ Pattern                                                                                ☐
+                           over-engineering không?
+Phụ lục B - Mẫu Nhật ký AI & Phiếu đánh giá đóng góp
+
+B.1. Mẫu Nhật ký sử dụng AI
+                                                                         Nhóm chỉnh
+ Giai đoạn       Prompt chính đã dùng            AI gợi ý gì
+                                                                         sửa/phản biện gì
+
+                                                                         Đồng ý, tách thành
+ VD: Giai đoạn   "Class DonDatPhong của tôi có   Gợi ý tách hàm in hóa
+                                                                         class HoaDonPDF
+ 2               đang vi phạm SRP không?"        đơn ra class riêng
+                                                                         riêng
+
+
+
+
+B.2. Mẫu Phiếu tự đánh giá đóng góp thành viên
+Mỗi thành viên tự chấm mức độ đóng góp của TẤT CẢ thành viên trong nhóm (kể cả bản thân),
+tổng tỉ lệ đóng góp của cả nhóm = 100%.
+
+ Họ tên & MSSV                     % đóng góp      Công việc chính đã thực hiện
+
+
+
+
+ Tổng cộng                            100%
+

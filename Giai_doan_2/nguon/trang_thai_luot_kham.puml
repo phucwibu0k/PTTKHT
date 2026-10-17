@@ -1,0 +1,35 @@
+@startuml
+skinparam defaultFontName Liberation Sans
+skinparam defaultFontSize 15
+skinparam dpi 180
+skinparam shadowing false
+skinparam stateBackgroundColor #F4F8FC
+state "Chờ khám" as Cho
+state "Đang khám" as Dang
+state "Hoàn tất" as Xong
+[*] --> Cho : / khởi tạo lượt; chốt phí
+Cho --> Dang : moLuotKham() [đúng bác sĩ]\n/ batDauKham(); tạo phiếu nháp
+Dang : luuNhap() [đúng quyền, phiên bản] / lưu nháp
+Dang : luuDonNhap() [đúng quyền, phiên bản] / lưu đơn nháp
+Dang : moLuotKham() [đúng bác sĩ] / trả bản nháp hiện có
+Dang --> Xong : hoanTatKham()\n[phiếu và đơn nếu có hợp lệ]\n/ hoanTat(); lưu nguyên tử
+Xong : thuPhi() [chưa có phiếu, tiền đủ] / lưu PhieuThu
+Xong : layPhieuThu() [có phiếu, đúng quyền] / trả phiếu cũ
+note right of Cho
+  Lượt chỉ được tạo sau khi tiepNhan()
+  thành công; chưa có phiếu thu.
+  Hủy lịch trước tiếp nhận không tạo lượt.
+end note
+note right of Dang
+  Các dòng trong ngăn trạng thái là
+  chuyển tiếp nội bộ: không rời trạng thái.
+  Lưu/hoàn tất lỗi: giữ bản đã lưu gần nhất.
+  Bản nháp chưa công bố cho bệnh nhân.
+end note
+note right of Xong
+  Không sửa nội dung khám sau hoàn tất.
+  /daThu = tồn tại PhieuThu hợp lệ.
+  Thu phí không đổi trạng thái khám.
+  Hồ sơ được bảo tồn để tra cứu.
+end note
+@enduml

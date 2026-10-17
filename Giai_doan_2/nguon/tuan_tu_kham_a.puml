@@ -1,0 +1,43 @@
+@startuml
+skinparam defaultFontName Liberation Sans
+skinparam defaultFontSize 14
+skinparam dpi 180
+skinparam shadowing false
+hide footbox
+autonumber
+actor "Bác sĩ" as A
+participant "q:QuanLyKhamBenh" as Q
+participant "luot:LuotKham" as L
+participant "don:DonThuoc" as D
+A -> Q : moLuotKham(bs, maLuot)
+activate Q
+note over Q : Kiểm tra bs được phân công;\nluồng này bắt đầu từ Chờ khám.
+Q -> L : batDauKham()
+activate L
+L --> Q : batDauKham(): void
+deactivate L
+note over Q : Lưu Đang khám và phiếu nháp cùng giao dịch.
+Q -> Q : traCuuLichSu(uid, bn)
+activate Q
+Q --> Q : traCuuLichSu(): dsPhieuHoanTat
+deactivate Q
+Q --> A : moLuotKham(): phieu, lichSu, v
+deactivate Q
+A -> Q : luuNhap(bs, phieu, v)
+activate Q
+note over Q : Xác minh chủ lượt, trạng thái và phiên bản;\nchỉ cập nhật trường chuyên môn được phép.
+Q --> A : luuNhap(): daLuu, vMoi
+deactivate Q
+opt Có chỉ định dùng thuốc — UC06 extend UC05
+A -> Q : luuDonNhap(bs, phieu, dong, vMoi)
+activate Q
+Q -> D : thayCacDong(dong)
+activate D
+D --> Q : thayCacDong(): void
+deactivate D
+note over Q : Kiểm tra dòng thuốc, lưu đơn nháp;\nchưa công bố cho bệnh nhân.
+Q --> A : luuDonNhap(): daLuu, vMoiNhat
+deactivate Q
+end
+ref over A, Q : SD02b — rà soát và hoàn tất UC05
+@enduml

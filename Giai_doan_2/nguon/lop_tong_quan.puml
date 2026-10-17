@@ -1,0 +1,5 @@
+@startuml
+!include mo_hinh_lop.iuml
+hide members
+left to right direction
+@enduml

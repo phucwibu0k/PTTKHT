@@ -1,0 +1,48 @@
+@startuml
+left to right direction
+skinparam dpi 180
+skinparam shadowing false
+skinparam defaultFontName Liberation Sans
+skinparam defaultFontSize 14
+skinparam packageStyle rectangle
+skinparam actorStyle stickman
+skinparam usecaseBackgroundColor #F6FAFF
+skinparam usecaseBorderColor #234765
+skinparam ArrowColor #3D4A57
+actor "Bệnh nhân" as BN
+actor "Lễ tân" as LT
+actor "Bác sĩ" as BS
+rectangle "HỆ THỐNG QUẢN LÝ PHÒNG KHÁM TƯ NHÂN" {
+ usecase "UC01\nĐặt lịch khám" as U1
+ usecase "UC02\nĐổi lịch khám" as U2
+ usecase "UC03\nHủy lịch khám" as U3
+ usecase "UC04\nTiếp nhận bệnh nhân" as U4
+ usecase "UC05\nKhám và lập phiếu khám\n--\nĐiểm mở rộng:\nSau ghi chẩn đoán,\ntrước hoàn tất phiếu" as U5
+ usecase "UC06\nKê đơn thuốc" as U6
+ usecase "UC07\nThu phí khám" as U7
+ usecase "UC08\nKiểm tra lịch trống" as U8
+ usecase "UC09\nGửi thông báo lịch hẹn" as U9
+ usecase "UC10\nTra cứu lịch sử khám" as U10
+}
+actor "Dịch vụ SMS\n«secondary»" as SMS
+BN -- U1
+BN -- U2
+BN -- U3
+BN -- U10
+LT -- U1
+LT -- U2
+LT -- U3
+LT -- U4
+LT -- U7
+BS -- U5
+BS -- U6
+BS -- U10
+U1 ..> U8 : <<include>>
+U2 ..> U8 : <<include>>
+U1 ..> U9 : <<include>>
+U2 ..> U9 : <<include>>
+U3 ..> U9 : <<include>>
+U5 ..> U10 : <<include>>
+U6 ..> U5 : <<extend>>\n[có chỉ định dùng thuốc]
+U9 -- SMS
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+left to right direction
+skinparam defaultFontName Liberation Sans
+skinparam defaultFontSize 14
+skinparam dpi 180
+skinparam shadowing false
+actor "Lễ tân" as LT
+rectangle "PHÂN RÃ: THU PHÍ KHÁM" {
+usecase "UC07\nThu phí khám" as U7
+usecase "UC07.1\nXác định khoản phí" as C1
+usecase "UC07.2\nGhi nhận thanh toán" as C2
+usecase "UC07.3\nXem / in phiếu thu" as C3
+}
+LT -- U7
+LT -- C3
+U7 ..> C1 : <<include>>
+U7 ..> C2 : <<include>>
+U7 ..> C3 : <<include>>
+note bottom of C3
+  Luồng thu phí thành công luôn hiển thị phiếu.
+  In là lựa chọn; có thể tra cứu/in lại độc lập.
+  Không gọi lại UC07.2 khi in lại.
+end note
+@enduml

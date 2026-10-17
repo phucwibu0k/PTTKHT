@@ -1,0 +1,24 @@
+@startuml
+left to right direction
+skinparam defaultFontName Liberation Sans
+skinparam defaultFontSize 14
+skinparam dpi 180
+skinparam shadowing false
+actor "Bác sĩ" as BS
+actor "Bệnh nhân" as BN
+rectangle "PHÂN RÃ: KHÁM VÀ KÊ ĐƠN" {
+usecase "UC05\nKhám và lập phiếu khám\n--\nĐiểm mở rộng:\nSau ghi chẩn đoán,\ntrước hoàn tất phiếu" as U5
+usecase "UC06\nKê đơn thuốc" as U6
+usecase "UC10\nTra cứu lịch sử khám" as U10
+usecase "UC05.1\nGhi nhận kết quả khám" as C1
+usecase "UC05.2\nHoàn tất hồ sơ khám" as C2
+}
+BS -- U5
+BS -- U6
+BS -- U10
+BN -- U10
+U5 ..> U10 : <<include>>
+U5 ..> C1 : <<include>>
+U5 ..> C2 : <<include>>
+U6 ..> U5 : <<extend>>\n[có chỉ định dùng thuốc]
+@enduml

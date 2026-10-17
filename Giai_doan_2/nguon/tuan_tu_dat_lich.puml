@@ -1,0 +1,46 @@
+@startuml
+skinparam defaultFontName Liberation Sans
+skinparam defaultFontSize 14
+skinparam dpi 180
+skinparam shadowing false
+hide footbox
+autonumber
+actor "Bệnh nhân / Lễ tân" as A
+participant "q:QuanLyLichHen" as Q
+participant "k:KhungGio" as K
+participant "tb:ThongBaoLichHen" as T
+participant "sms:CongSms" as S
+A -> Q : timKhungTrong(uid, bn, bs, ngay)
+activate Q
+Q --> A : timKhungTrong(): dsKhung
+ deactivate Q
+A -> Q : datLich(uid, bn, k, lyDo, req)
+activate Q
+note over Q : Kiểm tra quyền và dữ liệu; tra req.\nLuồng dưới: req mới, khung còn trống.
+Q -> Q : luuDatLich(bn, k, lyDo, req)
+activate Q
+critical Giao dịch đặt lịch; khóa khung và lịch bệnh nhân
+Q -> K : conTrong(bn, luc)
+activate K
+K --> Q : conTrong(): true
+deactivate K
+note over Q : Lưu hồ sơ mới nếu có, LichHen và\nthông báo Chờ gửi; kiểm tra ràng buộc; commit.
+end
+Q --> Q : luuDatLich(): lich
+deactivate Q
+Q -> Q : guiThongBao(lich, "DAT")
+activate Q
+Q -> S : guiTin(sdt, noiDung, maThongBao)
+activate S
+S --> Q : guiTin(): ketQuaGui
+deactivate S
+Q -> T : ghiKetQua(trangThai, chiTiet)
+activate T
+T --> Q : ghiKetQua(): void
+deactivate T
+note over Q : Lưu kết quả gửi sau giao dịch đặt lịch.\nLỗi SMS không hoàn tác LichHen.
+Q --> Q : guiThongBao(): ketQuaGui
+deactivate Q
+Q --> A : datLich(): maLich, ketQuaGui
+deactivate Q
+@enduml

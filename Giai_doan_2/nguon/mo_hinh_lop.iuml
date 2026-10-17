@@ -1,0 +1,168 @@
+skinparam defaultFontName Liberation Sans
+skinparam defaultFontSize 14
+skinparam dpi 180
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam classBackgroundColor #F4F8FC
+skinparam classBorderColor #244964
+skinparam ArrowColor #354A5E
+hide circle
+abstract class NhanVien <<entity>> {
+  - maNhanVien: String
+  - hoTen: String
+  - hoatDong: Boolean
+  + dangHoatDong(): Boolean
+}
+class BacSi <<entity>> {
+  - chuyenKhoa: String
+}
+class LeTan <<entity>>
+class BenhNhan <<entity>> {
+  - maBenhNhan: String
+  - hoTen: String
+  - ngaySinh: Date
+  - soDienThoai: String
+}
+class KhungGio <<entity>> {
+  - maKhung: String
+  - batDau: DateTime
+  - ketThuc: DateTime
+  + conTrong(benhNhan: BenhNhan, luc: DateTime): Boolean
+}
+class LichHen <<entity>> {
+  - maLich: String
+  - maYeuCau: String
+  - nguoiTaoId: String
+  - dauVanTayYeuCau: String
+  - lyDoKham: String
+  - trangThai: TrangThaiLich
+  - lyDoHuy: String [0..1]
+  - lucHuy: DateTime [0..1]
+  - nguoiThayDoiId: String
+  + coTheThayDoi(luc: DateTime): Boolean
+  + doiKhung(khungMoi: KhungGio): void
+  + huy(lyDo: String, luc: DateTime): void
+  + danhDauTiepNhan(): void
+}
+class LuotKham <<entity>> {
+  - maLuot: String
+  - lucTiepNhan: DateTime
+  - phiDaChot: Money
+  - trangThai: TrangThaiKham
+  - /daThu: Boolean
+  - phienBan: Integer
+  + batDauKham(): void
+  + hoanTat(): void
+  + duDieuKienThu(): Boolean
+}
+class DichVuKham <<entity>> {
+  - maDichVu: String
+  - tenDichVu: String
+  - phiHienHanh: Money
+}
+class PhieuKham <<entity>> {
+  - maPhieuKham: String
+  - trieuChung: String
+  - ketQuaKham: String
+  - chanDoan: String
+  - huongXuTri: String
+  - lucHoanTat: DateTime [0..1]
+  + capNhat(trieuChung: String, ketQua: String, chanDoan: String, huongXuTri: String): void
+  + kiemTraHopLe(): Boolean
+}
+class DonThuoc <<entity>> {
+  - maDon: String
+  - huongDanChung: String [0..1]
+  + thayCacDong(dong: DongThuoc[*]): void
+  + kiemTraHopLe(): Boolean
+}
+class DongThuoc <<entity>> {
+  - soThuTu: Integer
+  - tenThuocDaChot: String
+  - hamLuongDaChot: String
+  - dangBaoCheDaChot: String
+  - lieuMoiLan: String
+  - donViLieu: String
+  - duongDung: String
+  - soLanMoiNgay: Integer
+  - soNgay: Integer
+  - soLuong: Decimal
+  - donViCap: String
+  - huongDan: String [0..1]
+  + kiemTraHopLe(): Boolean
+}
+class Thuoc <<entity>> {
+  - maThuoc: String
+  - tenThuoc: String
+  - hamLuong: String
+  - dangBaoChe: String
+  - donVi: String
+}
+class PhieuThu <<entity>> {
+  - maPhieuThu: String
+  - soTien: Money
+  - tienNhan: Money
+  - lucThu: DateTime
+  + tinhTienTraLai(): Money
+}
+class ThongBaoLichHen <<entity>> {
+  - maThongBao: String
+  - hanhDong: String
+  - soDienThoaiNhan: String
+  - noiDung: String
+  - trangThai: TrangThaiGui
+  - chiTietKetQua: String [0..1]
+  + ghiKetQua(trangThai: TrangThaiGui, chiTiet: String): void
+}
+class QuanLyLichHen <<control>> {
+  + timKhungTrong(nguoiDungId: String, benhNhan: BenhNhan, bacSi: BacSi, ngay: Date): KhungGio[*]
+  + datLich(nguoiDungId: String, benhNhan: BenhNhan, khung: KhungGio, lyDo: String, maYeuCau: String): KetQua
+  + doiLich(nguoiDungId: String, maLich: String, khungMoi: KhungGio): KetQua
+  + huyLich(nguoiDungId: String, maLich: String, lyDo: String): KetQua
+  - luuDatLich(benhNhan: BenhNhan, khung: KhungGio, lyDo: String, maYeuCau: String): KetQua
+  - guiThongBao(lich: LichHen, hanhDong: String): KetQua
+}
+class QuanLyKhamBenh <<control>> {
+  + tiepNhan(leTan: LeTan, maLich: String, dichVu: DichVuKham): KetQua
+  + moLuotKham(bacSi: BacSi, maLuot: String): KetQua
+  + traCuuLichSu(nguoiDungId: String, benhNhan: BenhNhan): PhieuKham[*]
+  + luuNhap(bacSi: BacSi, phieu: PhieuKham, phienBan: Integer): KetQua
+  + luuDonNhap(bacSi: BacSi, phieu: PhieuKham, dong: DongThuoc[*], phienBan: Integer): KetQua
+  + hoanTatKham(bacSi: BacSi, maLuot: String, phienBan: Integer): KetQua
+}
+class QuanLyThuPhi <<control>> {
+  + xemPhi(leTan: LeTan, maLuot: String): KetQua
+  + thuPhi(leTan: LeTan, maLuot: String, tienNhan: Money): KetQua
+  + layPhieuThu(leTan: LeTan, maLuot: String): PhieuThu [0..1]
+  - luuThuPhi(leTan: LeTan, luot: LuotKham, tienNhan: Money): KetQua
+}
+class CongSms <<external>> {
+  + guiTin(soDienThoai: String, noiDung: String, maThongBao: String): KetQua
+}
+NhanVien <|-- BacSi
+NhanVien <|-- LeTan
+BacSi "1" -- "0..*" KhungGio : phụ trách
+BenhNhan "1" -- "0..*" LichHen : đặt
+KhungGio "1" -- "0..*" LichHen : lịch sử đặt
+LichHen "1" -- "0..1" LuotKham : được tiếp nhận thành
+LeTan "1" -- "0..*" LuotKham : tiếp nhận
+DichVuKham "1" -- "0..*" LuotKham : áp dụng
+LuotKham "1" *-- "0..1" PhieuKham : sở hữu
+PhieuKham "1" *-- "0..1" DonThuoc : kèm theo
+DonThuoc "1" *-- "0..*" DongThuoc : gồm
+Thuoc "1" -- "0..*" DongThuoc : tham chiếu
+LuotKham "1" -- "0..1" PhieuThu : được thu bằng
+LeTan "1" -- "0..*" PhieuThu : thu tiền
+LichHen "1" -- "0..*" ThongBaoLichHen : được thông báo
+QuanLyLichHen ..> LichHen
+QuanLyLichHen ..> KhungGio
+QuanLyLichHen ..> BenhNhan
+QuanLyLichHen ..> ThongBaoLichHen
+QuanLyLichHen ..> CongSms
+QuanLyKhamBenh ..> LuotKham
+QuanLyKhamBenh ..> PhieuKham
+QuanLyKhamBenh ..> DonThuoc
+QuanLyKhamBenh ..> DichVuKham
+QuanLyKhamBenh ..> LichHen
+QuanLyThuPhi ..> LuotKham
+QuanLyThuPhi ..> PhieuThu

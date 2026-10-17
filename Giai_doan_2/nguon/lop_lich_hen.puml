@@ -1,0 +1,18 @@
+@startuml
+!include mo_hinh_lop.iuml
+remove QuanLyLichHen
+remove QuanLyKhamBenh
+remove QuanLyThuPhi
+remove CongSms
+remove PhieuKham
+remove DonThuoc
+remove DongThuoc
+remove Thuoc
+remove PhieuThu
+hide methods
+show LichHen methods
+show KhungGio methods
+show LuotKham methods
+show ThongBaoLichHen methods
+show NhanVien methods
+@enduml

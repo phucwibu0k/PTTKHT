@@ -1,0 +1,40 @@
+@startuml
+skinparam defaultFontName Liberation Sans
+skinparam defaultFontSize 14
+skinparam dpi 180
+skinparam shadowing false
+hide footbox
+autonumber
+actor "Bác sĩ" as A
+participant "q:QuanLyKhamBenh" as Q
+participant "phieu:PhieuKham" as P
+participant "don:DonThuoc" as D
+participant "luot:LuotKham" as L
+ref over A, Q : SD02a — phiếu và đơn (nếu có) đã lưu nháp
+A -> Q : hoanTatKham(bs, maLuot, vMoiNhat)
+activate Q
+critical Giao dịch hoàn tất; kiểm tra quyền, trạng thái và phiên bản
+Q -> P : kiemTraHopLe()
+activate P
+opt Có đơn thuốc
+P -> D : kiemTraHopLe()
+activate D
+note over D : Ít nhất 1 dòng; mọi dòng hợp lệ;\nkhông lặp cùng thuốc/hàm lượng/dạng dùng.
+D --> P : kiemTraHopLe(): hopLeDon
+deactivate D
+end
+P --> Q : kiemTraHopLe(): hopLePhieu
+deactivate P
+alt Phiếu và đơn hợp lệ
+Q -> L : hoanTat()
+activate L
+L --> Q : hoanTat(): void
+deactivate L
+note over Q : Lưu phiếu, đơn và trạng thái Hoàn tất\nnguyên tử; tăng phiên bản; commit.
+else Không hợp lệ
+note over Q : Không commit thay đổi; giữ bản nháp đã lưu.\nLượt vẫn Đang khám, chưa được thu phí.
+end
+end
+Q --> A : hoanTatKham(): ketQua
+deactivate Q
+@enduml

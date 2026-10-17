@@ -1,0 +1,15 @@
+@startuml
+!include mo_hinh_lop.iuml
+remove QuanLyLichHen
+remove QuanLyKhamBenh
+remove QuanLyThuPhi
+remove CongSms
+remove NhanVien
+remove BacSi
+remove LeTan
+remove BenhNhan
+remove KhungGio
+remove LichHen
+remove DichVuKham
+remove ThongBaoLichHen
+@enduml

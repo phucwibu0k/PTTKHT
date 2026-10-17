@@ -1,0 +1,12 @@
+PASS: 18 lớp được khai báo một lần.
+PASS: kiểm tra tự thử phát hiện method không được khai báo.
+PASS: tuan_tu_dat_lich.puml: 7 lời gọi, đúng tên/số tham số/quyền truy cập; return tương ứng; activation cân bằng.
+PASS: tuan_tu_kham_a.puml: 6 lời gọi, đúng tên/số tham số/quyền truy cập; return tương ứng; activation cân bằng.
+PASS: tuan_tu_kham_b.puml: 4 lời gọi, đúng tên/số tham số/quyền truy cập; return tương ứng; activation cân bằng.
+PASS: tuan_tu_thu_phi.puml: 6 lời gọi, đúng tên/số tham số/quyền truy cập; return tương ứng; activation cân bằng.
+PASS: 12 sơ đồ PlantUML hợp lệ cú pháp.
+Tổng: 23 lời gọi; 3 tương tác nghiệp vụ, SD02 chia 2 hình.
+Giới hạn: kiểm tra tĩnh nguồn sơ đồ, chưa chạy phần mềm hoặc kiểm thử giao dịch trên CSDL.
+
+PASS: Giai_doan_2/Bao_cao_Giai_doan_2.pdf: 22 trang A4, số trang đúng; tiêu đề/mục lục hoặc 7 đặc tả con đã đối chiếu.
+PASS: Giai_doan_1/Bao_cao_Giai_doan_1_cap_nhat.pdf: 22 trang A4, số trang đúng; tiêu đề/mục lục hoặc 7 đặc tả con đã đối chiếu.

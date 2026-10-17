@@ -1,0 +1,48 @@
+@startuml
+skinparam defaultFontName Liberation Sans
+skinparam defaultFontSize 14
+skinparam dpi 180
+skinparam shadowing false
+hide footbox
+autonumber
+actor "Lễ tân" as A
+participant "q:QuanLyThuPhi" as Q
+participant "luot:LuotKham" as L
+participant "phieu:PhieuThu" as P
+A -> Q : xemPhi(lt, maLuot)
+activate Q
+Q --> A : xemPhi(): dichVu, phiDaChot, daThu
+deactivate Q
+note over A : Nhận tiền thực tế, đối chiếu và xác nhận đủ tiền.
+A -> Q : thuPhi(lt, maLuot, tienNhan)
+activate Q
+note over Q : Kiểm tra quyền; tải lượt; kiểm tra tiền nguyên VND.
+Q -> Q : luuThuPhi(lt, luot, tienNhan)
+activate Q
+critical Khóa lượt; tra phiếu hiện có; ràng buộc duy nhất theo lượt
+alt Đã có phiếu thu
+note over Q : Trả lại phiếu hiện có, không tạo khoản thu thứ hai.
+else Chưa có phiếu thu
+Q -> L : duDieuKienThu()
+activate L
+L --> Q : duDieuKienThu(): true
+deactivate L
+note over Q : Luồng chính: tiền nhận >= phiDaChot.\nTạo PhieuThu; lưu; commit. /daThu = true.
+end
+end
+Q --> Q : luuThuPhi(): phieu
+deactivate Q
+Q -> P : tinhTienTraLai()
+activate P
+P --> Q : tinhTienTraLai(): tienTraLai
+deactivate P
+Q --> A : thuPhi(): phieu, tienTraLai
+deactivate Q
+opt Xem hoặc in lại khi phản hồi/in ban đầu bị lỗi
+A -> Q : layPhieuThu(lt, maLuot)
+activate Q
+Q --> A : layPhieuThu(): phieu
+deactivate Q
+end
+note over A : Giao diện in cùng mã phiếu; lỗi in không gọi thu lại.
+@enduml
